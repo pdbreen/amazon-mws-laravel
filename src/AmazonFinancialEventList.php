@@ -261,7 +261,9 @@ class AmazonFinancialEventList extends AmazonFinanceCore {
                 $temp['TransactionPostedDate'] = (string)$x->TransactionPostedDate;
                 $temp['BusinessObjectType'] = (string)$x->BusinessObjectType;
                 $temp['SalesChannel'] = (string)$x->SalesChannel;
-                $temp['Charge'] = $this->parseCharge($x->Charge);
+                if (isset($x->Charge)) {
+                    $temp['Charge'] = $this->parseCharge($x->Charge);
+                }
                 if (isset($x->FeeList)) {
                     foreach($x->FeeList->children() as $z) {
                         $temp['FeeList'][] = $this->parseFee($z);
